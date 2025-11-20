@@ -66,12 +66,23 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // ADMIN ROUTES (PERLU LOGIN)
 // ========================================
 
-Route::middleware(['auth'])->group(function () {
-    // Admin Dokumen (untuk halaman index terpisah jika diperlukan)
+Route::middleware(['auth', 'admin'])->group(function () {
+    // Admin Dokumen
     Route::get('/admin/dokumen', [DokumenController::class, 'adminIndex'])->name('admin.dokumen.index');
+    Route::post('/admin/dokumen', [DokumenController::class, 'store'])->name('admin.dokumen.store');
+    Route::put('/admin/dokumen/{dokumen}', [DokumenController::class, 'update'])->name('admin.dokumen.update');
+    Route::delete('/admin/dokumen/{dokumen}', [DokumenController::class, 'destroy'])->name('admin.dokumen.destroy');
 });
 
-Route::prefix('admin')->middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
+    // Admin Berita
+    Route::get('/admin/berita', [BeritaController::class, 'adminIndex'])->name('admin.berita.index');
+    Route::post('/admin/berita', [BeritaController::class, 'store'])->name('admin.berita.store');
+    Route::put('/admin/berita/{berita}', [BeritaController::class, 'update'])->name('admin.berita.update');
+    Route::delete('/admin/berita/{berita}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');
+});
+
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     // Dashboard Admin
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     
