@@ -6,8 +6,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Login Admin - DISPERUMKIM Kota Bogor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!-- Cloudflare Turnstile Script -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         body {
             margin: 0;
@@ -260,28 +258,6 @@
             text-decoration: underline;
         }
 
-        /* Turnstile CAPTCHA Styling */
-        .turnstile-container {
-            display: flex;
-            justify-content: center;
-            margin: 15px 0;
-        }
-
-        .cf-turnstile {
-            transform: scale(0.9);
-        }
-
-        .login-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .login-btn:disabled:hover {
-            transform: none;
-            box-shadow: none;
-        }
-
         /* Animation for form appearance */
         .login-container {
             animation: fadeInUp 0.8s ease-out;
@@ -355,11 +331,7 @@
 
         @if($errors->any())
             <div class="alert alert-danger" role="alert">
-                @if($errors->has('cf-turnstile-response'))
-                    {{ $errors->first('cf-turnstile-response') }}
-                @else
-                    {{ $errors->first() }}
-                @endif
+                {{ $errors->first() }}
             </div>
         @endif
 
@@ -383,19 +355,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label>Verifikasi Keamanan</label>
-                <div class="turnstile-container">
-                    <div class="cf-turnstile" 
-                         data-sitekey="{{ config('turnstile.site_key') }}"
-                         data-callback="onTurnstileSuccess"
-                         data-error-callback="onTurnstileError"
-                         data-expired-callback="onTurnstileExpired">
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" class="login-btn" id="loginBtn" disabled>
+            <button type="submit" class="login-btn">
                 <i class="fa fa-sign-in-alt btn-icon"></i>
                 Login
             </button>
@@ -408,45 +368,5 @@
             </a>
         </div>
     </div>
-
-    <script>
-        // Turnstile CAPTCHA callbacks
-        function onTurnstileSuccess(token) {
-            console.log('Turnstile success:', token);
-            document.getElementById('loginBtn').disabled = false;
-            document.getElementById('loginBtn').style.opacity = '1';
-            document.getElementById('loginBtn').style.cursor = 'pointer';
-        }
-
-        function onTurnstileError(error) {
-            console.error('Turnstile error:', error);
-            document.getElementById('loginBtn').disabled = true;
-            document.getElementById('loginBtn').style.opacity = '0.6';
-            document.getElementById('loginBtn').style.cursor = 'not-allowed';
-        }
-
-        function onTurnstileExpired() {
-            console.log('Turnstile expired');
-            document.getElementById('loginBtn').disabled = true;
-            document.getElementById('loginBtn').style.opacity = '0.6';
-            document.getElementById('loginBtn').style.cursor = 'not-allowed';
-        }
-
-        // Enter key untuk login (hanya jika CAPTCHA sudah diselesaikan)
-        document.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter' && !document.getElementById('loginBtn').disabled) {
-                document.querySelector('form').submit();
-            }
-        });
-
-        // Form validation
-        document.querySelector('form').addEventListener('submit', function(e) {
-            if (document.getElementById('loginBtn').disabled) {
-                e.preventDefault();
-                alert('Silakan selesaikan verifikasi keamanan terlebih dahulu.');
-                return false;
-            }
-        });
-    </script>
 </body>
 </html>
