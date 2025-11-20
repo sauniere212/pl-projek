@@ -22,6 +22,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $request->session()->put('admin_logged_in', true);
             return redirect()->intended('/admin');
         }
 
@@ -38,6 +39,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        $request->session()->forget('admin_logged_in');
         
         return redirect('/login')->with('success', 'Anda berhasil logout.');
     }
