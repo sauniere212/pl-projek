@@ -119,7 +119,7 @@
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
                             @if($berita->gambar)
-                                <img src="{{ asset('storage/' . $berita->gambar) }}" class="card-img-top" alt="{{ $berita->judul }}" style="height: 200px; object-fit: cover;">
+                                <img src="{{ $berita->gambar }}" class="card-img-top" alt="{{ $berita->judul }}" style="height: 200px; object-fit: cover;">
                             @endif
                             <div class="card-body">
                                 <h5 class="card-title" style="color: #000;">{{ $berita->judul }}</h5>
