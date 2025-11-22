@@ -79,12 +79,12 @@
             @if($carousels->count() > 0)
                 @foreach($carousels as $index => $carousel)
                     <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                        <img src="{{ $carousel->image_url }}" class="d-block w-100" alt="{{ $carousel->judul }}" style="height: 400px; object-fit: cover;">
+                        <img src="{{ $carousel->image_url }}" class="d-block w-100" alt="{{ $carousel->judul }}" style="height: 200px; object-fit: cover;">
                     </div>
                 @endforeach
             @else
                 <div class="carousel-item active">
-                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 400px; display: flex; align-items: center; justify-content: center; color: white; text-align: center;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 200px; display: flex; align-items: center; justify-content: center; color: white; text-align: center;">
                         <div>
                             <h3>Selamat Datang di DISPERUMKIM Kota Bogor</h3>
                             <p>Silakan kelola carousel melalui halaman admin</p>
