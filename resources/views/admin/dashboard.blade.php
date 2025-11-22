@@ -561,8 +561,8 @@
                                                 <small class="text-muted"><i
                                                         class="fas fa-calendar-alt me-1"></i>{{ $galeri->tanggal }}</small>
                                                 <div class="mt-3">
-                                                    <div class="d-flex justify-content-end gap-2">
-                                                        <button class="btn btn-outline-primary btn-sm photo-action-btn"
+                                                    <div class="d-flex justify-content-end gap-1">
+                                                        <button class="btn btn-sm btn-warning"
                                                             onclick="editGaleri({{ $galeri->id }})"
                                                             title="Edit Foto">
                                                             <i class="fas fa-edit"></i>
@@ -657,8 +657,8 @@
                                                             class="fas fa-calendar-alt me-1"></i>{{ $video->tanggal }}</small>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <div class="d-flex justify-content-end gap-2">
-                                                        <button class="btn btn-outline-primary btn-sm video-action-btn"
+                                                    <div class="d-flex justify-content-end gap-1">
+                                                        <button class="btn btn-sm btn-warning"
                                                             onclick="editVideo({{ $video->id }})"
                                                             title="Edit Video">
                                                             <i class="fas fa-edit"></i>
